@@ -5,8 +5,8 @@ import { Table, Input } from "antd";
 const { Search } = Input;
 const columns = [
   {
-    title: "ID",
-    dataIndex: "id",
+    title: "Name",
+    dataIndex: "name",
   },
   {
     title: "Sku",
@@ -19,10 +19,6 @@ const columns = [
   {
     title: "Barcode",
     dataIndex: "barcode",
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
   },
 ];
 
@@ -37,7 +33,7 @@ function TabforServer() {
       .then((res) => {
         setData(
           res.data.items.sort((a, b) =>
-            a.supplier.toLowerCase() > b.supplier.toLowerCase() ? 1 : -1
+            a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
           )
         );
 
@@ -52,11 +48,10 @@ function TabforServer() {
   const onChange = (e) => {
     let newData = JSON.parse(localStorage.getItem("filData"))
       .filter((item) =>
-        item.supplier.toLowerCase().includes(e.target.value.toLowerCase())
+        item.name.toLowerCase().includes(e.target.value.toLowerCase())
       )
-      .sort((a, b) =>
-        a.supplier.toLowerCase() > b.supplier.toLowerCase() ? 1 : -1
-      );
+
+      .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
     setData(newData);
   };
   return (
